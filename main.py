@@ -47,13 +47,12 @@ def game_loop(cap: cv2.VideoCapture):
     gesture_list = list(GESTURES.keys())
     gesture_list.remove("None")
     running = True
-    # choose random gesture
     while running:
         text = "❓"
         for round in range(1,ROUND_COUNT+1):
             text = "❓"
+            # choose random gesture
             computer_gesture = random.choice(gesture_list)
-            #print(computer_gesture)
             player_gesture = None
             start_time = time()
             end_time = start_time + COUNTDOWN_TIME
@@ -72,7 +71,6 @@ def game_loop(cap: cv2.VideoCapture):
                     if located_gesture.category_name in gesture_list:
                         player_gesture = located_gesture.category_name
                         print(f"Gesture change: {player_gesture}")
-                # add emoji
                 remaining_time = end_time - time()
                 print(remaining_time)
                 if remaining_time <= 0.05:
@@ -83,6 +81,7 @@ def game_loop(cap: cv2.VideoCapture):
                 cv2.putText(frame,"Current gesture:",(50,(int(height / 2) - 10)),1,1.5,(255,0,0),2)
                 cv2.putText(frame,f"Round {round}/{ROUND_COUNT}",(width - 50,50),1,2,(255,0,0),2)
                 cv2.putText(frame,f"{score['Player']}-{score['Computer']}",(width - 50,80),1,2,(255,0,0),2)
+                # add emoji
                 if player_gesture != None:
                     frame = draw_emoji(frame,GESTURES[player_gesture],(50,int(height / 2)))
                 frame = draw_emoji(frame,text,(50,50))
