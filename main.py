@@ -72,7 +72,6 @@ def game_loop(cap: cv2.VideoCapture):
                         player_gesture = located_gesture.category_name
                         print(f"Gesture change: {player_gesture}")
                 remaining_time = end_time - time()
-                print(remaining_time)
                 if remaining_time <= 0.05:
                     text = GESTURES[computer_gesture]
                     # it works
